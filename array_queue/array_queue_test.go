@@ -17,7 +17,7 @@ func TestAdd(t *testing.T) {
 	for i, v := range tests {
 		aq.Add(v)
 		if aq.n != i+1 {
-			t.Errorf("aq.n = %v at %v th Add", aq.n, i)
+			t.Errorf("aq.n = %v at %v th Add", aq.n, i+1)
 		}
 	}
 }
@@ -29,7 +29,7 @@ func TestAddMany(t *testing.T) {
 	for i, v := range tests {
 		aq.Add(v)
 		if aq.n != i+1 {
-			t.Errorf("aq.n = %v at %v th Add", aq.n, i)
+			t.Errorf("aq.n = %v at %v th Add", aq.n, i+1)
 		}
 	}
 }

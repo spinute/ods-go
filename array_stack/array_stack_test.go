@@ -17,7 +17,7 @@ func TestPush(t *testing.T) {
 	for i, v := range tests {
 		as.Push(v)
 		if as.n != i+1 {
-			t.Errorf("as.n = %v at %v th push", as.n, i)
+			t.Errorf("as.n = %v at %v th push", as.n, i+1)
 		}
 	}
 }
@@ -29,7 +29,7 @@ func TestPushMany(t *testing.T) {
 	for i, v := range tests {
 		as.Push(v)
 		if as.n != i+1 {
-			t.Errorf("as.n = %v at %v th push", as.n, i)
+			t.Errorf("as.n = %v at %v th push", as.n, i+1)
 		}
 	}
 }
