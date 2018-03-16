@@ -7,19 +7,18 @@ type ArrayStack struct {
 }
 
 func New(c int) ArrayStack {
-	var b [c]int
 	return ArrayStack{
 		cap: c,
-		buf: b,
+		buf: make([]Value, c),
 	}
 }
 
 func (as *ArrayStack) Push(v Value) {
-	as.add(as.n, v)
+	as.Add(as.n, v)
 }
 
-func (as *ArrayStack) Pop() {
-	return as.remove(as.n - 1)
+func (as *ArrayStack) Pop() Value {
+	return as.Remove(as.n - 1)
 }
 
 func (as ArrayStack) Get(i int) Value {
@@ -45,7 +44,7 @@ func (as *ArrayStack) Add(i int, v Value) {
 
 func (as *ArrayStack) Remove(i int) Value {
 	ret := as.buf[i]
-	for j := i; i < n-1; i++ {
+	for j := i; i < as.n-1; i++ {
 		as.buf[j] = as.buf[j+1]
 	}
 	as.n--
@@ -56,14 +55,14 @@ func (as *ArrayStack) Remove(i int) Value {
 }
 
 func (as ArrayStack) is_full() bool {
-	return as.n+1 == as.cap
+	return as.n == as.cap
 }
 
 func (as ArrayStack) is_sparse() bool {
-	return len(as.buf) >= 3*n
+	return len(as.buf) >= 3*as.n
 }
 
-func max(a, b int) {
+func max(a, b int) int {
 	if a < b {
 		return b
 	} else {
@@ -72,7 +71,8 @@ func max(a, b int) {
 }
 
 func (as *ArrayStack) resize() {
-	var buf_new [max(2*as.n, 1)]int
+	as.cap = max(2*as.n, 1)
+	buf_new := make([]Value, as.cap)
 	for i := 0; i < as.n; i++ {
 		buf_new[i] = as.buf[i]
 	}
