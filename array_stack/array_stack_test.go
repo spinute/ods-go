@@ -5,19 +5,14 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	tests := [...]int{1, 2, 100, 0}
-
-	for _, cap := range tests {
-		as := New(cap)
-		if as.n != 0 || as.cap != cap {
-			t.Errorf("ArrayStack.New(%v): n = %v, cap = %v", cap, as.n, as.cap)
-		}
+	if ret := New().n; ret != 0 {
+		t.Errorf("ArrayStack.New().n = %v", ret)
 	}
 }
 
 func TestPush(t *testing.T) {
 	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
-	as := New(2)
+	as := New()
 
 	for i, v := range tests {
 		as.Push(v)
@@ -29,7 +24,7 @@ func TestPush(t *testing.T) {
 
 func TestPushMany(t *testing.T) {
 	tests := make([]Value, 12345)
-	as := New(0)
+	as := New()
 
 	for i, v := range tests {
 		as.Push(v)
@@ -41,7 +36,7 @@ func TestPushMany(t *testing.T) {
 
 func TestPushAndPop(t *testing.T) {
 	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
-	as := New(1)
+	as := New()
 
 	for _, v := range tests {
 		as.Push(v)
@@ -53,7 +48,7 @@ func TestPushAndPop(t *testing.T) {
 
 func TestPushAndPop2(t *testing.T) {
 	n := 123
-	as := New(0)
+	as := New()
 
 	for i := 0; i < n; i++ {
 		as.Push(Value(i + 1))

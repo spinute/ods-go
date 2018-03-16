@@ -5,19 +5,14 @@ import (
 )
 
 func TestNew(t *testing.T) {
-	tests := [...]int{1, 2, 100, 0}
-
-	for _, cap := range tests {
-		fas := New(cap)
-		if fas.n != 0 || fas.cap != cap {
-			t.Errorf("FastArrayStack.New(%v): n = %v, cap = %v", cap, fas.n, fas.cap)
-		}
+	if ret := New().n; ret != 0 {
+		t.Errorf("FastArrayStack.New().n = %v", ret)
 	}
 }
 
 func TestPush(t *testing.T) {
 	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
-	fas := New(2)
+	fas := New()
 
 	for i, v := range tests {
 		fas.Push(v)
@@ -29,7 +24,7 @@ func TestPush(t *testing.T) {
 
 func TestPushMany(t *testing.T) {
 	tests := make([]Value, 12345)
-	fas := New(0)
+	fas := New()
 
 	for i, v := range tests {
 		fas.Push(v)
@@ -41,7 +36,7 @@ func TestPushMany(t *testing.T) {
 
 func TestPushAndPop(t *testing.T) {
 	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
-	fas := New(1)
+	fas := New()
 
 	for _, v := range tests {
 		fas.Push(v)
@@ -53,7 +48,7 @@ func TestPushAndPop(t *testing.T) {
 
 func TestPushAndPop2(t *testing.T) {
 	n := 123
-	fas := New(0)
+	fas := New()
 
 	for i := 0; i < n; i++ {
 		fas.Push(Value(i + 1))

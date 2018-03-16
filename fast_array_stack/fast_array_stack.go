@@ -6,11 +6,8 @@ type FastArrayStack struct {
 	buf    []Value
 }
 
-func New(c int) FastArrayStack {
-	return FastArrayStack{
-		cap: c,
-		buf: make([]Value, c),
-	}
+func New() FastArrayStack {
+	return FastArrayStack{}
 }
 
 func (fas *FastArrayStack) Push(v Value) {

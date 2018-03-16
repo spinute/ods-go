@@ -6,11 +6,8 @@ type ArrayStack struct {
 	buf    []Value
 }
 
-func New(c int) ArrayStack {
-	return ArrayStack{
-		cap: c,
-		buf: make([]Value, c),
-	}
+func New() ArrayStack {
+	return ArrayStack{}
 }
 
 func (as *ArrayStack) Push(v Value) {
