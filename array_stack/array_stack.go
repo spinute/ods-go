@@ -1,34 +1,39 @@
 package array_stack
 
-type Value int
+import "github.com/spinute/ods-go/utils"
+
 type ArrayStack struct {
 	n, cap int
-	buf    []Value
+	buf    []utils.V
 }
 
 func New() ArrayStack {
 	return ArrayStack{}
 }
 
-func (as *ArrayStack) Push(v Value) {
+func (as ArrayStack) Size() int {
+	return as.n
+}
+
+func (as *ArrayStack) Push(v utils.V) {
 	as.Add(as.n, v)
 }
 
-func (as *ArrayStack) Pop() Value {
+func (as *ArrayStack) Pop() utils.V {
 	return as.Remove(as.n - 1)
 }
 
-func (as ArrayStack) Get(i int) Value {
+func (as ArrayStack) Get(i int) utils.V {
 	return as.buf[i]
 }
 
-func (as *ArrayStack) Set(i int, v Value) Value {
+func (as *ArrayStack) Set(i int, v utils.V) utils.V {
 	ret := as.buf[i]
 	as.buf[i] = v
 	return ret
 }
 
-func (as *ArrayStack) Add(i int, v Value) {
+func (as *ArrayStack) Add(i int, v utils.V) {
 	if as.is_full() {
 		as.resize()
 	}
@@ -39,7 +44,7 @@ func (as *ArrayStack) Add(i int, v Value) {
 	as.n++
 }
 
-func (as *ArrayStack) Remove(i int) Value {
+func (as *ArrayStack) Remove(i int) utils.V {
 	ret := as.buf[i]
 	for j := i; i < as.n-1; i++ {
 		as.buf[j] = as.buf[j+1]
@@ -59,17 +64,9 @@ func (as ArrayStack) is_sparse() bool {
 	return len(as.buf) >= 3*as.n
 }
 
-func max(a, b int) int {
-	if a < b {
-		return b
-	} else {
-		return a
-	}
-}
-
 func (as *ArrayStack) resize() {
-	as.cap = max(2*as.n, 1)
-	buf_new := make([]Value, as.cap)
+	as.cap = utils.Max(2*as.n, 1)
+	buf_new := make([]utils.V, as.cap)
 	for i := 0; i < as.n; i++ {
 		buf_new[i] = as.buf[i]
 	}

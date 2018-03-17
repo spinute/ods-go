@@ -1,6 +1,7 @@
 package fast_array_stack
 
 import (
+	"github.com/spinute/ods-go/utils"
 	"testing"
 )
 
@@ -11,7 +12,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestPush(t *testing.T) {
-	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []utils.V{1, 2, 1, -1, -2, -100, 0, 0}
 	fas := New()
 
 	for i, v := range tests {
@@ -23,7 +24,7 @@ func TestPush(t *testing.T) {
 }
 
 func TestPushMany(t *testing.T) {
-	tests := make([]Value, 12345)
+	tests := make([]utils.V, 12345)
 	fas := New()
 
 	for i, v := range tests {
@@ -35,7 +36,7 @@ func TestPushMany(t *testing.T) {
 }
 
 func TestPushAndPop(t *testing.T) {
-	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []utils.V{1, 2, 1, -1, -2, -100, 0, 0}
 	fas := New()
 
 	for _, v := range tests {
@@ -51,11 +52,11 @@ func TestPushAndPop2(t *testing.T) {
 	fas := New()
 
 	for i := 0; i < n; i++ {
-		fas.Push(Value(i + 1))
+		fas.Push(utils.V(i + 1))
 	}
 
 	for i := 0; i < n; i++ {
-		if ret, want := fas.Pop(), Value(n-i); ret != want {
+		if ret, want := fas.Pop(), utils.V(n-i); ret != want {
 			t.Errorf("expect %d but returned %d", ret, want)
 		}
 	}

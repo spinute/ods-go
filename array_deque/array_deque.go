@@ -1,9 +1,10 @@
 package array_deque
 
-type Value int
+import "github.com/spinute/ods-go/utils"
+
 type ArrayDeque struct {
 	n, cap, i int
-	buf       []Value
+	buf       []utils.V
 }
 
 func New() ArrayDeque {
@@ -13,18 +14,18 @@ func New() ArrayDeque {
 func (ad ArrayDeque) buf_i(i int) int {
 	return (ad.i + i) % ad.cap
 }
-func (ad ArrayDeque) buf_get(i int) Value {
+func (ad ArrayDeque) buf_get(i int) utils.V {
 	return ad.buf[ad.buf_i(i)]
 }
-func (ad *ArrayDeque) buf_set(i int, v Value) {
+func (ad *ArrayDeque) buf_set(i int, v utils.V) {
 	ad.buf[ad.buf_i(i)] = v
 }
 
-func (ad ArrayDeque) Get(i int) Value {
+func (ad ArrayDeque) Get(i int) utils.V {
 	return ad.buf_get(i)
 }
 
-func (ad *ArrayDeque) Set(i int, v Value) Value {
+func (ad *ArrayDeque) Set(i int, v utils.V) utils.V {
 	ret := ad.buf_get(i)
 	ad.buf_set(i, v)
 	return ret
@@ -38,7 +39,7 @@ func mod_pred(i, mod int) int {
 	}
 }
 
-func (ad *ArrayDeque) Add(i int, v Value) {
+func (ad *ArrayDeque) Add(i int, v utils.V) {
 	if ad.is_full() {
 		ad.resize()
 	}
@@ -61,7 +62,7 @@ func mod_succ(i, mod int) int {
 	return (i + 1) % mod
 }
 
-func (ad *ArrayDeque) Remove(i int) Value {
+func (ad *ArrayDeque) Remove(i int) utils.V {
 	ret := ad.buf_get(i)
 	if i < ad.n/2 {
 		for j := i; j > 0; j-- {
@@ -88,17 +89,9 @@ func (ad ArrayDeque) is_sparse() bool {
 	return len(ad.buf) >= 3*ad.n
 }
 
-func max(a, b int) int {
-	if a < b {
-		return b
-	} else {
-		return a
-	}
-}
-
 func (ad *ArrayDeque) resize() {
-	cap_new := max(2*ad.n, 1)
-	buf_new := make([]Value, cap_new)
+	cap_new := utils.Max(2*ad.n, 1)
+	buf_new := make([]utils.V, cap_new)
 	for i := 0; i < ad.n; i++ {
 		buf_new[i] = ad.buf_get(i)
 	}

@@ -1,6 +1,7 @@
 package array_queue
 
 import (
+	"github.com/spinute/ods-go/utils"
 	"testing"
 )
 
@@ -11,7 +12,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestAdd(t *testing.T) {
-	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []utils.V{1, 2, 1, -1, -2, -100, 0, 0}
 	aq := New()
 
 	for i, v := range tests {
@@ -23,7 +24,7 @@ func TestAdd(t *testing.T) {
 }
 
 func TestAddMany(t *testing.T) {
-	tests := make([]Value, 12345)
+	tests := make([]utils.V, 12345)
 	aq := New()
 
 	for i, v := range tests {
@@ -35,7 +36,7 @@ func TestAddMany(t *testing.T) {
 }
 
 func TestAddAndRemove(t *testing.T) {
-	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []utils.V{1, 2, 1, -1, -2, -100, 0, 0}
 	aq := New()
 
 	for _, v := range tests {
@@ -51,11 +52,11 @@ func TestAddAndRemove2(t *testing.T) {
 	aq := New()
 
 	for i := 0; i < n; i++ {
-		aq.Add(Value(i))
+		aq.Add(utils.V(i))
 	}
 
 	for i := 0; i < n; i++ {
-		if ret, want := aq.Remove(), Value(i); ret != want {
+		if ret, want := aq.Remove(), utils.V(i); ret != want {
 			t.Errorf("expect %d but returned %d", ret, want)
 		}
 	}

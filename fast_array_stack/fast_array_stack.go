@@ -1,34 +1,35 @@
 package fast_array_stack
 
-type Value int
+import "github.com/spinute/ods-go/utils"
+
 type FastArrayStack struct {
 	n, cap int
-	buf    []Value
+	buf    []utils.V
 }
 
 func New() FastArrayStack {
 	return FastArrayStack{}
 }
 
-func (fas *FastArrayStack) Push(v Value) {
+func (fas *FastArrayStack) Push(v utils.V) {
 	fas.Add(fas.n, v)
 }
 
-func (fas *FastArrayStack) Pop() Value {
+func (fas *FastArrayStack) Pop() utils.V {
 	return fas.Remove(fas.n - 1)
 }
 
-func (fas FastArrayStack) Get(i int) Value {
+func (fas FastArrayStack) Get(i int) utils.V {
 	return fas.buf[i]
 }
 
-func (fas *FastArrayStack) Set(i int, v Value) Value {
+func (fas *FastArrayStack) Set(i int, v utils.V) utils.V {
 	ret := fas.buf[i]
 	fas.buf[i] = v
 	return ret
 }
 
-func (fas *FastArrayStack) Add(i int, v Value) {
+func (fas *FastArrayStack) Add(i int, v utils.V) {
 	if fas.is_full() {
 		fas.resize()
 	}
@@ -37,7 +38,7 @@ func (fas *FastArrayStack) Add(i int, v Value) {
 	fas.n++
 }
 
-func (fas *FastArrayStack) Remove(i int) Value {
+func (fas *FastArrayStack) Remove(i int) utils.V {
 	ret := fas.buf[i]
 	copy(fas.buf[i:fas.n-1], fas.buf[i+1:fas.n])
 	fas.n--
@@ -55,17 +56,9 @@ func (fas FastArrayStack) is_sparse() bool {
 	return len(fas.buf) >= 3*fas.n
 }
 
-func max(a, b int) int {
-	if a < b {
-		return b
-	} else {
-		return a
-	}
-}
-
 func (fas *FastArrayStack) resize() {
-	fas.cap = max(2*fas.n, 1)
-	buf_new := make([]Value, fas.cap)
+	fas.cap = utils.Max(2*fas.n, 1)
+	buf_new := make([]utils.V, fas.cap)
 	copy(buf_new, fas.buf)
 	fas.buf = buf_new
 }
