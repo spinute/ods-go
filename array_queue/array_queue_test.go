@@ -11,7 +11,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestAdd(t *testing.T) {
-	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
 	aq := New()
 
 	for i, v := range tests {
@@ -35,7 +35,7 @@ func TestAddMany(t *testing.T) {
 }
 
 func TestAddAndRemove(t *testing.T) {
-	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
 	aq := New()
 
 	for _, v := range tests {

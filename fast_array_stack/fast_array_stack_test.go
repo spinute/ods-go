@@ -11,7 +11,7 @@ func TestNew(t *testing.T) {
 }
 
 func TestPush(t *testing.T) {
-	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
 	fas := New()
 
 	for i, v := range tests {
@@ -35,7 +35,7 @@ func TestPushMany(t *testing.T) {
 }
 
 func TestPushAndPop(t *testing.T) {
-	tests := [...]Value{1, 2, 1, -1, -2, -100, 0, 0}
+	tests := []Value{1, 2, 1, -1, -2, -100, 0, 0}
 	fas := New()
 
 	for _, v := range tests {
