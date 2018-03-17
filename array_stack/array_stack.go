@@ -1,6 +1,8 @@
 package array_stack
 
-import "github.com/spinute/ods-go/utils"
+import (
+	"github.com/spinute/ods-go/utils"
+)
 
 type ArrayStack struct {
 	n, cap int
@@ -37,7 +39,7 @@ func (as *ArrayStack) Add(i int, v utils.V) {
 	if as.is_full() {
 		as.resize()
 	}
-	for j := as.n; j > i; j++ {
+	for j := as.n; j > i; j-- {
 		as.buf[j] = as.buf[j-1]
 	}
 	as.buf[i] = v
@@ -46,7 +48,7 @@ func (as *ArrayStack) Add(i int, v utils.V) {
 
 func (as *ArrayStack) Remove(i int) utils.V {
 	ret := as.buf[i]
-	for j := i; i < as.n-1; i++ {
+	for j := i; j < as.n-1; j++ {
 		as.buf[j] = as.buf[j+1]
 	}
 	as.n--
