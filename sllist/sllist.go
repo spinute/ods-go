@@ -24,6 +24,10 @@ func New() *SLList {
 	return new(SLList)
 }
 
+func (l *SLList) Size() int {
+	return l.n
+}
+
 func (l *SLList) Push(x utils.V) {
 	new_node := nodeNew(x)
 	new_node.next = l.head
