@@ -73,6 +73,7 @@ func (bst *BinarySearchTree) findLast(x utils.V) *node {
 		comp := utils.Compare(x, w.x)
 		last = w
 		if comp < 0 {
+			w = w.left
 		} else if comp > 0 {
 			w = w.right
 		} else {
