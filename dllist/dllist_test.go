@@ -44,7 +44,7 @@ func TestPushAndPop(t *testing.T) {
 
 	for i := 0; i < n; i++ {
 		if ret := dll.Pop(); ret != utils.V(n-1-i) {
-			t.Errorf("dll.Pop() = %v", i, ret)
+			t.Errorf("%v th dll.Pop() = %v", i, ret)
 		}
 	}
 }
@@ -58,7 +58,7 @@ func TestAddAndRemove(t *testing.T) {
 
 	for i := 0; i < n; i++ {
 		if ret := dll.Remove(); ret != utils.V(i) {
-			t.Errorf("dll.Remove() = %v", i, ret)
+			t.Errorf("%v th dll.Remove() = %v", i, ret)
 		}
 	}
 }

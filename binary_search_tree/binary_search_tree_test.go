@@ -43,7 +43,7 @@ func TestFindEQ(t *testing.T) {
 	for i := 0; i < n; i++ {
 		ret := bst.FindEQ(utils.V(i))
 		if ret == true {
-			t.Errorf("Add returned non-nil unexpectedly, ret=%d", ret)
+			t.Errorf("Add returned non-nil unexpectedly, ret=%v", ret)
 		}
 	}
 

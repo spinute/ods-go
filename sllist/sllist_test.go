@@ -44,7 +44,7 @@ func TestPushAndPop(t *testing.T) {
 
 	for i := 0; i < n; i++ {
 		if ret := sll.Pop(); ret != utils.V(n-1-i) {
-			t.Errorf("sll.Pop() = %v", i, ret)
+			t.Errorf("%v th sll.Pop() = %v", i, ret)
 		}
 	}
 }
@@ -58,7 +58,7 @@ func TestAddAndRemove(t *testing.T) {
 
 	for i := 0; i < n; i++ {
 		if ret := sll.Remove(); ret != utils.V(i) {
-			t.Errorf("sll.Remove() = %v", i, ret)
+			t.Errorf("%v th sll.Remove() = %v", i, ret)
 		}
 	}
 }
